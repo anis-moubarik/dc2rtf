@@ -6,6 +6,10 @@
   "scripts": {
     "test": "make test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anis-moubarik/dc2rtf.git"
+  }
   "keywords": [
     "dublin",
     "core",
