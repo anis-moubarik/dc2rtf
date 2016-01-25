@@ -2,19 +2,40 @@ var should = require('chai').should(),
     dc2rtf = require('../index'),
     map = dc2rtf.map,
     maketext = dc2rtf.maketext,
-    dctojson = dc2rtf.dctojson,
-    expect = require('chai').expect;
+    kktojson = dc2rtf.kktojson,
+    oaidctojson = dc2rtf.oaidctojson;
 var nock = require('nock');
 var http = require('http');
 
 
+
 var resource = nock("http://testurl.com")
-    .get('/xml/')
+    .get('/xml/').twice()
     .replyWithFile(200, __dirname + "/test.xml")
+    .get('/xml2/').twice()
+    .replyWithFile(200, __dirname + "/oaidc.xml");
+
 
 describe("#map", function(){
-   it('maps metadata to an array', function(){
-       "asd".should.equal("asd");
+    var result;
+    var mapped;
+    before(function(done){
+        var xml = '';
+        http.get("http://testurl.com/xml/", function(res){
+            res.on("data", function(data){ xml += data;});
+
+            res.on("end", function(){
+                kktojson(xml).then(function(data){
+                    result = data;
+                    mapped = map(result);
+                    done();
+                });
+            });
+        });
+    });
+
+   it('should map metadata to an json object', function(){
+       mapped.should.be.a('Object');
    });
 });
 
@@ -29,7 +50,7 @@ describe("#kktojson", function(){
             res.on("data", function(data){ xml += data;});
 
             res.on("end", function(){
-                dctojson(xml).then(function(data){
+                kktojson(xml).then(function(data){
                     result = data;
                     done();
                 });
@@ -37,7 +58,7 @@ describe("#kktojson", function(){
         });
     });
 
-    it('should print valid json array from oai url', function(){
+    it('should print valid json array from oai-pmh url', function(){
         result.should.be.a('Array');
     });
 
@@ -49,4 +70,37 @@ describe("#kktojson", function(){
         var schema = result[0].schema;
         schema.should.equal("dc");
     })
+});
+
+/**
+ * Test the oaidc format
+ */
+describe("#oaidctojson", function(){
+    var result;
+    before(function(done){
+        var xml = '';
+        http.get("http://testurl.com/xml2/", function(res){
+            res.on("data", function(data){ xml += data; });
+
+            res.on("end", function(){
+                oaidctojson(xml).then(function(data){
+                    result = data;
+                    done();
+                });
+            });
+        });
+    });
+
+    it('should print valid json array from oai-pmh url', function(){
+        result.should.be.a('Array');
+    });
+
+    it('should be length of 8', function(){
+        result.should.have.length(8);
+    });
+
+    it('should have dc schema', function(){
+        var schema = result[0].schema;
+        schema.should.equal("dc");
+    });
 });

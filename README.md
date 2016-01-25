@@ -6,7 +6,7 @@ For now it only works for National Library of Finlands KK format.
 
 ## Installation
     
-    npm install <git here> --save
+    npm install git://github.com/anis-moubarik/dc2rtf.git --save
     
     
 ## Usage

@@ -10,7 +10,8 @@
     "type": "RT",
     "issn": "SN",
     "isbn": "SN",
-    "subject": "K1"
+    "subject": "K1",
+    "publisher": "PB"
   },
   "lang": {
     "fi": "Finnish(32)",

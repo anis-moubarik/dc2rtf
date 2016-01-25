@@ -12,18 +12,22 @@ module.exports = {
      * @returns {{Array}|result}
      */
     map: function(metadata, conf){
-        config = conf || require('../mapping.json');
+        config = conf || require('./mapping.json');
         result = {};
         for(var i = 0; i < metadata.length; i++){
-            var qual = metadata[i]['$'].qualifier;
-            var elm = metadata[i]['$'].element;
-            var lang = metadata[i]['$'].language;
-            var value = metadata[i]['$'].value.replace(/\r?\n|\r/g, "");
+            var qual = metadata[i].qualifier;
+            var elm = metadata[i].element;
+            var lang = metadata[i].language;
+            var value = metadata[i].value.replace(/\r?\n|\r/g, "");
 
-            if(elm === "type" && lang === "en"){
-                if(value === "Master's thesis"){
+            //Get the type and add it to the result array
+            if(elm === "type"){
+                if(value.indexOf("thesis") > -1){
                     result['RT'] = "Dissertation/Thesis";
-                    continue;
+                }else if(value.indexOf("abstract") > -1){
+                    result['RT'] = "Abstract";
+                }else{
+                    result['RT'] = "Generic";
                 }
             }
 
@@ -45,12 +49,6 @@ module.exports = {
                 continue;
             }
 
-            //Add LUT Publisher
-            if(elm === "contributor" && (value.indexOf("Lappeenrannan") > -1)){
-                result['PB'] = value.split("/")[0];
-                continue;
-            }
-
             //If tag is undefined, ignore it
             var tag = config.mapping[qual]
             if(tag === undefined){
@@ -59,6 +57,7 @@ module.exports = {
 
             if(elm === "language" && qual === "iso"){
                 value = config.lang[value];
+                continue;
             }
 
             //Add primary authors to a array
@@ -76,7 +75,15 @@ module.exports = {
 
             //If the tag is not empty, append the value to it
             if(result[tag] !== undefined){
-                result[tag] += ", "+value;
+                if (result[tag].constructor === Array){
+                    result[tag].push(value);
+                }else{
+                    var oldvalue = result[tag];
+
+                    var arr = [oldvalue];
+                    arr.push(value);
+                    result[tag] = arr;
+                }
             }else {
                 result[tag] = value;
             }
@@ -110,14 +117,33 @@ module.exports = {
      * @param data
      * @returns {json} data
      */
-    dctojson: function(data){
+    kktojson: function(data){
 
         var promise = new Promise(function(resolve, reject){
             parser.parseString(data, function(err, result){
                 if(err)
                     reject(err);
                 else
-                    resolve(fromOAI2JS(result));
+                    resolve(fromKK2JS(result));
+            });
+        });
+
+        return promise;
+    },
+
+    /**
+     *
+     * @param data
+     * @returns {json} data
+     */
+    oaidctojson: function(data){
+
+        var promise = new Promise(function(resolve, reject){
+            parser.parseString(data, function(err, result){
+                if(err)
+                    reject(err);
+                else
+                    resolve(fromQDC2JS(result));
             });
         });
 
@@ -131,7 +157,7 @@ module.exports = {
  * @param data
  * @returns {Array}
  */
-var fromOAI2JS = function(data){
+var fromKK2JS = function(data){
     var result = data['OAI-PMH']['GetRecord'][0].record[0].metadata[0]['kk:metadata'][0]['kk:field'];
     var json = [];
     for(var i = 0; i < result.length; i++){
@@ -146,4 +172,19 @@ var fromOAI2JS = function(data){
         json.push(jsonobject);
     }
     return json;
-}
+};
+
+var fromQDC2JS = function(data){
+    var result = data['OAI-PMH']['GetRecord'][0].record[0].metadata[0]['oai_dc:dc'][0];
+    delete result['$']
+    var json = [];
+
+    for(key in result){
+        var element = key.split(':')[1];
+
+        var jsonobject = {schema: "dc", element: element, value: result[key]};
+        json.push(jsonobject);
+    }
+
+    return json;
+};
