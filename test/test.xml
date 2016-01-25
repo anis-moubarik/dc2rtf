@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="static/style.xsl"?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"><responseDate>2016-01-22T14:39:42Z</responseDate>
+    <request verb="GetRecord" identifier="oai:www.doria.fi:10024/119946" metadataPrefix="kk">http://www.doria.fi/oai/request</request>
+    <GetRecord>
+        <record>
+            <header>
+                <identifier>oai:www.doria.fi:10024/119946</identifier>
+                <datestamp>2016-01-22T02:01:03Z</datestamp>
+                <setSpec>com_10024_4000</setSpec>
+                <setSpec>com_10024_3999</setSpec>
+                <setSpec>col_10024_4006</setSpec>
+            </header>
+            <metadata><kk:metadata xmlns:kk="http://example.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:doc="http://www.lyncode.com/xoai">
+                <kk:identifier type="handle" value="10024/119946"/>
+                <kk:type name="item"/>
+                <kk:link href="http://www.doria.fi/handle/10024/119946"/>
+                <kk:field schema="dc" element="contributor" qualifier="author" language="none" value="Saari, Hanna"/>
+                <kk:field schema="dc" element="date" qualifier="accessioned" language="none" value="2016-01-21T11:16:21Z"/>
+                <kk:field schema="dc" element="date" qualifier="issued" language="none" value="2016"/>
+                <kk:field schema="dc" element="identifier" qualifier="uri" language="none" value="http://www.doria.fi/handle/10024/119946"/>
+                <kk:field schema="dc" element="identifier" qualifier="urn" language="none" value="URN:NBN:fi-fe201601213459"/>
+                <kk:field schema="dc" element="description" qualifier="abstract" language="-" value="Tämän Pro Gradu-tutkielman tavoite on tutkia Business Process Re-engineering menetelmiä myyntiprosessien tehostamisessa. Tutkimuksen teoreettinen viiteke-hys rakentuu myynninjohtamisen, myyntiprosessien ja Business Process Mana-gementin ja Business Process Re-enineeringin ympärille. IT-järjestelmät ovat myös oleellinen osa-alue tutkimuksen kannalta ja niiden osuutta kuvataan niin myyntiprosesseissa kuin Business Process Re-engineering -menetelmien yhtey-dessä.&#13;&#10;&#13;&#10;Tutkielmassa perehdytään aikaisempaan tutkimusmateriaaliin ja akateemiseen kirjallisuuteen yllämainituilla osa-alueilla. Tavoitteena on löytää aikaisempia tutki-muksia myyntiprosessien tehostamisesta ja BPR:n roolista näissä tapauksissa. Myös myynninjohtamisen vaikutusta tehokkaaseen myyntiprosessiin tutkitaan, kuten myös IT-järjestelmien erilaisia rooleja tehokkaissa myyntiprosesseissa.&#13;&#10;&#13;&#10;Tutkielman empiirinen osio on kvalitatiivinen Case-tutkimus eräässä rahoitusalan yrityksessä. Tutkimus tehdään haastattelemalla myyntihenkilöstöä ja esimiehiä. Lisäksi analysoidaan yrityksen myyntiprosessiin liittyvää muuta materiaalia. Case-tutkimuksen tuloksia peilataan aiempaan akateemiseen tutkimukseen ja tuloksista pyritään löytämään ratkaisuja, miten BPR -menetelmillä voidaan tehostaa yrityksen myyntiprosessia."/>
+                <kk:field schema="dc" element="description" qualifier="abstract" language="-" value="The objective of this study is to find out whether sales processes can be optimized through Business Process Re-engineering. The theoretic framework presented in the beginning of this Master’s thesis includes sales management, sales processes, Business Process Management and Business Process Re-engineering. IT-solutions are closely related to all of these theories so their impact is also studied.&#13;&#10;&#13;&#10;The previous academic literature and research conducted in sales processes and BPR are presented in the second part. The goal is to find out what kind of re-search has been conducted in effective sales processes and how BPR is related to it. The possible BPR methods are presented and also the role of sales man-agement in effective sales processes is studied.&#13;&#10;&#13;&#10;The empirical part of this Master’s thesis is a qualitative case study of a sales pro-cess in a financial company. The sales people of this company were interviewed and other relevant data was collected to support the study. The results of the case study are reflected to the previous academic research studied in the second part of the thesis and the possible BPR methods that can optimize sales processes efficiency are presented."/>
+                <kk:field schema="dc" element="format" qualifier="extent" language="-" value="87"/>
+                <kk:field schema="dc" element="language" qualifier="iso" language="-" value="fi"/>
+                <kk:field schema="dc" element="subject" qualifier="lutstrategy" language="-" value="Liiketalous / Business economics"/>
+                <kk:field schema="dc" element="embargo" qualifier="lift" language="none" value="2018-01-21"/>
+                <kk:field schema="dc" element="embargo" qualifier="terms" language="none" value="2018-01-21"/>
+                <kk:field schema="dc" element="contributor" language="-" value="Lappeenrannan teknillinen yliopisto, School of Business and Management, Tietojohtaminen ja johtajuus / Lappeenranta University of Technology, School of Business and Management, Knowledge Management and Leadership"/>
+                <kk:field schema="dc" element="subject" language="-" value="Business Process Re-engineering"/>
+                <kk:field schema="dc" element="subject" language="-" value="myyntiprosessi"/>
+                <kk:field schema="dc" element="subject" language="-" value="myynninjohtaminen"/>
+                <kk:field schema="dc" element="subject" language="-" value="Business Process Management"/>
+                <kk:field schema="dc" element="subject" language="-" value="sales process"/>
+                <kk:field schema="dc" element="subject" language="-" value="sales management"/>
+                <kk:field schema="dc" element="title" language="-" value="Business process re-engineering  -menetelmät myyntiprosessin tehokkuuden parantamisessa (Case-yritys)"/>
+                <kk:field schema="dc" element="type" language="fi" value="Pro gradu"/>
+                <kk:field schema="dc" element="type" language="en" value="Pro gradu thesis"/>
+                <kk:field schema="dc" element="ths" language="none" value="Collan, Mikael"/>
+                <kk:field schema="dc" element="rev" language="none" value="Luukka, Pasi"/>
+                <kk:file bundle="ORIGINAL" href="http://www.doria.fi/bitstream/10024/119946/2/gradu.pdf" name="gradu.pdf" type="application/pdf" size="903586" sequence="2"/>
+            </kk:metadata>
+            </metadata>
+        </record>
+    </GetRecord>
+</OAI-PMH>

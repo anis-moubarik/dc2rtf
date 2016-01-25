@@ -11,7 +11,7 @@ For now it only works for National Library of Finlands KK format.
     
 ## Usage
     URL should be a link to a OAI-PMH provider f.ex. 
-    http://www.example.com/oai/request?verb=GetRecord&metadataPrefix=kk&identifier=oai:www.example.com:12345/12345
+    http://www.example.com/oai/request?verb=GetRecord&metadataPrefix=kk&identifier=oai:PREFIX:handle
     var dc2rtf = require('dc2rtf'),
         map = dc2rtf.map,
         maketext = dc2rtf.maketext;

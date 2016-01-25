@@ -1,4 +1,9 @@
 var config = {};
+var xml2js = require('xml2js');
+var http = require('http');
+var Promise = require('promise');
+
+var parser = new xml2js.Parser();
 module.exports = {
     /**
      *
@@ -7,7 +12,7 @@ module.exports = {
      * @returns {{Array}|result}
      */
     map: function(metadata, conf){
-        config = conf || require('../config.json');
+        config = conf || require('../mapping.json');
         result = {};
         for(var i = 0; i < metadata.length; i++){
             var qual = metadata[i]['$'].qualifier;
@@ -98,6 +103,47 @@ module.exports = {
         }
 
         return text;
-    }
+    },
 
+    /**
+     *
+     * @param data
+     * @returns {json} data
+     */
+    dctojson: function(data){
+
+        var promise = new Promise(function(resolve, reject){
+            parser.parseString(data, function(err, result){
+                if(err)
+                    reject(err);
+                else
+                    resolve(fromOAI2JS(result));
+            });
+        });
+
+        return promise;
+    }
 };
+
+
+/**
+ *
+ * @param data
+ * @returns {Array}
+ */
+var fromOAI2JS = function(data){
+    var result = data['OAI-PMH']['GetRecord'][0].record[0].metadata[0]['kk:metadata'][0]['kk:field'];
+    var json = [];
+    for(var i = 0; i < result.length; i++){
+        var qualifier = result[i]['$'].qualifier;
+        var element = result[i]['$'].element;
+        var language = result[i]['$'].language;
+        var value = result[i]['$'].value.replace(/\r?\n|\r/g, "");
+
+        qualifier = qualifier !== undefined  ? qualifier : "none";
+
+        var jsonobject = {schema: "dc", element: element, language: language, qualifier: qualifier, value: value};
+        json.push(jsonobject);
+    }
+    return json;
+}
