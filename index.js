@@ -181,15 +181,8 @@ var fromQDC2JS = function(data){
     for(key in result){
         var element = key.split(':')[1];
 
-        if(result[key].constructor === Array){
-            for(var i = 0; i < result[key].length; i++){
-                var jsonobject = {schema: "dc", element: element, value: result[key][i].replace(/\r?\n|\r/g, "")};
-                json.push(jsonobject);
-            }
-        }else {
-            var jsonobject = {schema: "dc", element: element, value: result[key].replace(/\r?\n|\r/g, "")};
-            json.push(jsonobject);
-        }
+        var jsonobject = {schema: "dc", element: element, value: result[key]};
+        json.push(jsonobject);
     }
 
     return json;

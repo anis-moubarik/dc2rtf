@@ -32,8 +32,15 @@ describe("#map kkdc", function(){
             });
         });
     });
+
     it('should map kk metadata to a json object', function(){
         mapped1.should.be.a('Object');
+    });
+
+    it('should print valid RTF text', function(){
+        var rtf = maketext(mapped1);
+
+        console.log(rtf);
     });
 });
 
@@ -113,8 +120,8 @@ describe("#oaidctojson", function(){
         result.should.be.a('Array');
     });
 
-    it('should be length of 18', function(){
-        result.should.have.length(18);
+    it('should be length of 8', function(){
+        result.should.have.length(8);
     });
 
     it('should have dc schema', function(){
