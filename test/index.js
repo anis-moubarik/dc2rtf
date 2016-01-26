@@ -16,27 +16,45 @@ var resource = nock("http://testurl.com")
     .replyWithFile(200, __dirname + "/oaidc.xml");
 
 
-describe("#map", function(){
-    var result;
-    var mapped;
+describe("#map kkdc", function(){
+    var mapped1;
     before(function(done){
+        //Get kk xml
         var xml = '';
         http.get("http://testurl.com/xml/", function(res){
             res.on("data", function(data){ xml += data;});
 
             res.on("end", function(){
                 kktojson(xml).then(function(data){
-                    result = data;
-                    mapped = map(result);
+                    mapped1 = map(data);
                     done();
                 });
             });
         });
     });
+    it('should map kk metadata to a json object', function(){
+        mapped1.should.be.a('Object');
+    });
+});
 
-   it('should map metadata to an json object', function(){
-       mapped.should.be.a('Object');
-   });
+describe("#map oaidc", function(){
+    var mapped2;
+    //Get oai dc
+    var oaidcxml = '';
+    http.get("http://testurl.com/xml2/", function(res){
+        res.on("data", function(data){ oaidcxml += data; });
+
+        res.on("end", function(){
+            oaidctojson(oaidcxml).then(function(data){
+                mapped2 = map(data);
+                done();
+            });
+        });
+    });
+
+    it('should map oai dc metadata to a json object', function(){
+        mapped2.should.be.a('Object');
+    });
 });
 
 /**
@@ -63,7 +81,7 @@ describe("#kktojson", function(){
     });
 
     it('should be length of 24', function(){
-       result.should.have.length(24);
+        result.should.have.length(24);
     });
 
     it("should have dc schema", function(){
@@ -95,8 +113,8 @@ describe("#oaidctojson", function(){
         result.should.be.a('Array');
     });
 
-    it('should be length of 8', function(){
-        result.should.have.length(8);
+    it('should be length of 18', function(){
+        result.should.have.length(18);
     });
 
     it('should have dc schema', function(){

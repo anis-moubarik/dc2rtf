@@ -4,6 +4,7 @@
     "issued": "YR",
     "uri": "UL",
     "abstract": "AB",
+    "description": "AB",
     "title": "T1",
     "volume": "VO",
     "iso": "LA",
@@ -11,7 +12,8 @@
     "issn": "SN",
     "isbn": "SN",
     "subject": "K1",
-    "publisher": "PB"
+    "publisher": "PB",
+    "creator": "A1"
   },
   "lang": {
     "fi": "Finnish(32)",

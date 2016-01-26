@@ -50,7 +50,7 @@ module.exports = {
             }
 
             //If tag is undefined, ignore it
-            var tag = config.mapping[qual]
+            var tag = config.mapping[qual] == undefined ? config.mapping[elm] : config.mapping[qual];
             if(tag === undefined){
                 continue;
             }
@@ -178,12 +178,18 @@ var fromQDC2JS = function(data){
     var result = data['OAI-PMH']['GetRecord'][0].record[0].metadata[0]['oai_dc:dc'][0];
     delete result['$']
     var json = [];
-
     for(key in result){
         var element = key.split(':')[1];
 
-        var jsonobject = {schema: "dc", element: element, value: result[key]};
-        json.push(jsonobject);
+        if(result[key].constructor === Array){
+            for(var i = 0; i < result[key].length; i++){
+                var jsonobject = {schema: "dc", element: element, value: result[key][i].replace(/\r?\n|\r/g, "")};
+                json.push(jsonobject);
+            }
+        }else {
+            var jsonobject = {schema: "dc", element: element, value: result[key].replace(/\r?\n|\r/g, "")};
+            json.push(jsonobject);
+        }
     }
 
     return json;
