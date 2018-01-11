@@ -56,7 +56,7 @@ module.exports = {
             }
 
             if(elm === "language" && qual === "iso"){
-                value = config.lang[value];
+                value = typeof config.lang[value] == 'undefined' ? "" : config.lang[value];
                 continue;
             }
 
